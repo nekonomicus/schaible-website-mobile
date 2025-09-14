@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Samuel F. Schaible - Orthopedic Surgeon & Researcher</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --accent: #3b82f6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--light);
+            color: var(--gray-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 75px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 3rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        /* CV Cards */
+        .cv-category {
+            margin-bottom: 3rem;
+        }
+
+        .cv-category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .cv-item {
+            background: white;
+            border: 1px solid var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cv-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateX(5px);
+        }
+
+        .cv-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            flex: 1;
+        }
+
+        .cv-date {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .cv-institution {
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-description {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cv-item:hover .cv-description {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: white;
+            border: 1px solid var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .publication-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .publication-authors {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-journal {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .publication-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .publication-status {
+            display: inline-block;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        /* Conferences */
+        .conference-item {
+            background: white;
+            border: 1px solid var(--gray-100);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .conference-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .conference-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .conference-event {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .conference-location {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .conference-type {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+        }
+
+        .conference-type.poster {
+            background: var(--accent);
+        }
+
+        .conference-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .conference-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            border: 1px solid var(--gray-100);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .skill-category-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-list {
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            /* Navigation Mobile */
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+            }
+
+            /* Hero Mobile */
+            .hero {
+                margin-top: 100px;
+                padding: 3rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+                line-height: 1.2;
+            }
+
+            .hero .subtitle {
+                font-size: 0.95rem;
+            }
+
+            /* Content Mobile */
+            .content {
+                padding: 3rem 1rem;
+            }
+
+            .section {
+                margin-bottom: 4rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            /* CV Items Mobile */
+            .cv-category-title {
+                font-size: 1rem;
+            }
+
+            .cv-item {
+                padding: 1.25rem;
+            }
+
+            .cv-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cv-title {
+                font-size: 1rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .cv-date {
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+                color: var(--gray-500);
+            }
+
+            .cv-institution {
+                font-size: 0.9rem;
+            }
+
+            .cv-description {
+                font-size: 0.85rem;
+            }
+
+            /* Touch-friendly hover states for mobile */
+            .cv-item:active .cv-description {
+                max-height: 200px;
+                opacity: 1;
+                margin-top: 0.75rem;
+            }
+
+            /* Publications Mobile */
+            .publication-item {
+                padding: 1.25rem;
+            }
+
+            .publication-authors {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .publication-title {
+                font-size: 0.95rem;
+                line-height: 1.3;
+            }
+
+            .publication-journal {
+                font-size: 0.85rem;
+            }
+
+            .publication-link {
+                font-size: 0.8rem;
+            }
+
+            .publication-status {
+                display: block;
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: fit-content;
+            }
+
+            /* Conferences Mobile */
+            .conference-item {
+                padding: 1rem;
+            }
+
+            .conference-title {
+                font-size: 0.9rem;
+                line-height: 1.3;
+            }
+
+            .conference-event {
+                font-size: 0.8rem;
+            }
+
+            .conference-location {
+                font-size: 0.8rem;
+            }
+
+            .conference-type {
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .conference-link {
+                display: inline-block;
+                margin-top: 0.25rem;
+            }
+
+            /* Skills Grid Mobile */
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .skill-category {
+                padding: 1rem;
+            }
+
+            .skill-category-title {
+                font-size: 0.85rem;
+            }
+
+            .skill-list {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .cv-title {
+                font-size: 0.95rem;
+            }
+
+            .publication-title {
+                font-size: 0.9rem;
+            }
+
+            .conference-title {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Ensure touch targets are at least 44x44 pixels */
+        @media (pointer: coarse) {
+            .nav-link, .publication-link, .conference-link {
+                padding: 0.5rem;
+                margin: -0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Dr. Samuel F. Schaible</div>
+            <div class="nav-links">
+                <a href="#cv" class="nav-link">Curriculum Vitae</a>
+                <a href="#publications" class="nav-link">Publications</a>
+                <a href="#conferences" class="nav-link">Conferences</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Dr. Samuel F. Schaible</h1>
+            <div class="subtitle">Orthopedic Surgery · Translational Research · Medical Education</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- CV Section -->
+        <section id="cv" class="section">
+            <h2 class="section-title">Curriculum Vitae</h2>
+
+            <!-- Current Position -->
+            <div class="cv-category">
+                <h3 class="cv-category-title">Current Position</h3>
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Resident Physician, Orthopedic Surgery & Traumatology</div>
+                        <div class="cv-date">Feb 2022 – Present</div>
+                    </div>
+                    <div class="cv-institution">Inselspital, University Hospital Bern</div>
+                    <div class="cv-description">
+                        Delivers operative and perioperative care within an academic service, combining careful pre-op planning, OR execution, and close collaboration with radiology and anatomy units.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Specialty Training</div>
+                        <div class="cv-date">2022 – Present</div>
+                    </div>
+                    <div class="cv-institution">Prof. Moritz Tannast (since Aug 2024), Prof. Klaus A. Siebenrock (Feb 2022–Aug 2024)</div>
+                    <div class="cv-description">
+                        Longitudinal mentorship with stepwise responsibility across complex reconstructive cases in a university hospital setting.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Sarcoma Center Resident</div>
+                        <div class="cv-date">Ongoing</div>
+                    </div>
+                    <div class="cv-institution">Prof. Dr. Dr. F. M. Klenke</div>
+                    <div class="cv-description">
+                        Rotation through a multidisciplinary oncology program with exposure to limb-preserving strategies and board-level decision pathways.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Lead Instructor, Anatomical Dissection Course</div>
+                        <div class="cv-date">Current</div>
+                    </div>
+                    <div class="cv-institution">University of Bern Medical Faculty</div>
+                    <div class="cv-description">
+                        Designs and supervises cadaveric teaching blocks; emphasizes safe technique, structured reasoning, and reproducible anatomy labs for students and residents.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Experience -->
+            <div class="cv-category">
+                <h3 class="cv-category-title">Professional Experience</h3>
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Resident Physician, Clinical Radiology</div>
+                        <div class="cv-date">2021 – 2022</div>
+                    </div>
+                    <div class="cv-institution">University Medicine Mannheim</div>
+                    <div class="cv-description">
+                        Daily cross-sectional work with MRI/CT and consultative reads for surgical teams; strengthened image–clinic dialogue and reporting precision.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Clinical Lead</div>
+                        <div class="cv-date">2019 – 2021</div>
+                    </div>
+                    <div class="cv-institution">Quantgene, Inc., Santa Monica / Berlin</div>
+                    <div class="cv-description">
+                        Helped stand up high-throughput diagnostics (>1,000 samples/day) and contributed to cDNA sequencing algorithm development; built durable, auditable workflow routines.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Academic Tutor</div>
+                        <div class="cv-date">2013 – 2019</div>
+                    </div>
+                    <div class="cv-institution">Medical Faculty, Heidelberg University</div>
+                    <div class="cv-description">
+                        Taught anatomy, biochemistry, and physiology over six years; mentored cohorts with a focus on clarity of explanation and exam readiness.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="cv-category">
+                <h3 class="cv-category-title">Education</h3>
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Doctorate (Dr. med.), magna cum laude</div>
+                        <div class="cv-date">2018 – 2022</div>
+                    </div>
+                    <div class="cv-institution">University Hospital Heidelberg</div>
+                    <div class="cv-description">
+                        Dissertation on portocaval shunts to prevent small-for-size syndrome after extended hepatectomy; methods-driven, surgical-adjacent research with careful outcomes analysis.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Doctor of Medicine (M.D.)</div>
+                        <div class="cv-date">2012 – 2020</div>
+                    </div>
+                    <div class="cv-institution">Heidelberg University</div>
+                    <div class="cv-description">
+                        State Exam 2.0; clinical rotations at University Hospital Heidelberg and Klinikum rechts der Isar (TU Munich) provided broad surgical and medical exposure.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">ERASMUS Exchange</div>
+                        <div class="cv-date">2016 – 2017</div>
+                    </div>
+                    <div class="cv-institution">Karolinska Institute, Stockholm</div>
+                    <div class="cv-description">
+                        Twelve months split evenly between Surgery and Neurology; Swedish fluency developed directly from ward work.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">B.A. International History</div>
+                        <div class="cv-date">2013 – 2014</div>
+                    </div>
+                    <div class="cv-institution">London School of Economics</div>
+                    <div class="cv-description">
+                        Upper Second Class Honours; Head of Digital Marketing, LSE German Society – led the society's digital outreach and member communications.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Abitur</div>
+                        <div class="cv-date">2012</div>
+                    </div>
+                    <div class="cv-institution">Dietrich-Bonhoeffer-Gymnasium, Weinheim</div>
+                    <div class="cv-description">
+                        1.0 (899/900 points, 99.99th percentile); a quantitative, disciplined foundation for later clinical and research work.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards -->
+            <div class="cv-category">
+                <h3 class="cv-category-title">Awards & Scholarships</h3>
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Studienstiftung des deutschen Volkes</div>
+                        <div class="cv-date">2016 – 2021</div>
+                    </div>
+                    <div class="cv-institution">Scholarship Holder</div>
+                    <div class="cv-description">
+                        National merit award supporting academic development, mobility, and cross-site training.
+                    </div>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <div class="cv-title">Maria-und-Filiberto-Fuentenebro Scholarship</div>
+                        <div class="cv-date">2013 – 2014</div>
+                    </div>
+                    <div class="cv-institution">£13,500</div>
+                    <div class="cv-description">
+                        Funded study at the LSE; enabled early academic focus and international exposure.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Technical Skills</div>
+                    <div class="skill-list">
+                        Medical Imaging (Mimics/3-matic)<br>
+                        Medical 3D Printing (Prusa, Formlabs)<br>
+                        EPIC Physician Builder<br>
+                        Programming: Python, R, React<br>
+                        Statistical Learning & Biostatistics
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Languages</div>
+                    <div class="skill-list">
+                        German (Native)<br>
+                        English (Fluent)<br>
+                        French (Fluent)<br>
+                        Swedish (Fluent)<br>
+                        Spanish (Conversational)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <h2 class="section-title">Peer-Reviewed Publications</h2>
+
+            <div class="publication-item">
+                <div class="publication-authors">Schaible SF, Häckel S, Rutsch N, Aregger FC, Bigdon SF, Schoenborn V, Broger I, Albers CE, Tinner C.</div>
+                <div class="publication-title">Outcomes of odontoid fractures with associated cardiac arrest: retrospective bi-center case series and systematic literature review</div>
+                <div class="publication-journal">Scand J Trauma Resusc Emerg Med. 2024;32(1):105.</div>
+                <a href="https://doi.org/10.1186/s13049-024-01277-z" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Schaible SF, Hanke MS, Tinner C, Bastian JD, Albers CE, Keel MJB.</div>
+                <div class="publication-title">Corona mortis: clinical evaluation of prevalence, anatomy, and relevance in anterior approaches to the pelvis and acetabulum</div>
+                <div class="publication-journal">Eur J Orthop Surg Traumatol. 2024;34(3):1397-1404.</div>
+                <a href="https://doi.org/10.1007/s00590-023-03808-3" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Aregger FC, Gewiess J, Albers CE, Deml MC, Schaible S, Hoppe S, Tinner C.</div>
+                <div class="publication-title">Evaluation of the true lateral fluoroscopic projection for the relation of the S1 recess/foramen to safe corridors in transiliac-transsacral screw placement in human cadaveric pelves</div>
+                <div class="publication-journal">Eur J Orthop Surg Traumatol. 2024;35(1):31.</div>
+                <a href="https://doi.org/10.1007/s00590-024-04157-5" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Schaible SF, Hamann C, Grunt S, Aregger FC, Deml MC.</div>
+                <div class="publication-title">Case report: C1/2 rotational instability progressing to extreme subaxial hyperkyphosis in an adolescent with severe catatonia</div>
+                <div class="publication-journal">Brain Spine. 2024;4:102747.</div>
+                <a href="https://doi.org/10.1016/j.bas.2024.102747" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Schaible SF, Eberlein SC, Schaefer R, Klenke FM, Hecker A.</div>
+                <div class="publication-title">Clinical outcomes of standard primary vs. primary rotating hinge total knee arthroplasty: a retrospective matched-pair analysis</div>
+                <div class="publication-journal">J Orthop Surg Res. 2025;20(1):575.</div>
+                <a href="https://doi.org/10.1186/s13018-025-05961-3" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Eberlein SC, Hess S, Schaible SF, Klenke FM, Hecker A.</div>
+                <div class="publication-title">ACL tunnel placement using 3D printed surgical guides—a porcine feasibility study</div>
+                <div class="publication-journal">3D Print Med. 2025;11(1):6.</div>
+                <a href="https://doi.org/10.1186/s41205-024-00215-0" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Post AM, Gaume M, van Royen BJ, Janssen E, Lundine K, Johnson M, Neagoe P, Kruyt M, Boissiere L, Kaleeta Maalu JP, et al.</div>
+                <div class="publication-title">One-way self-expanding rods for early onset neuromuscular scoliosis: a two-year follow-up of an international cohort</div>
+                <div class="publication-journal">Eur Spine J. 2025:1-10.</div>
+                <a href="https://doi.org/10.1007/s00586-025-08884-z" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Gerhards C, Haselmann V, Schaible SF, Ast V, Kittel M, Thiel M, Hertel A, Schoenberg SO, Neumaier M, Froelich MF.</div>
+                <div class="publication-title">Exploring the synergistic potential of radiomics and laboratory biomarkers for enhanced identification of vulnerable COVID-19 patients</div>
+                <div class="publication-journal">Microorganisms. 2023;11(7):1740.</div>
+                <a href="https://doi.org/10.3390/microorganisms11071740" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Hermann BT, Pfeil S, Groenke N, Schaible S, Kunze R, Ris F, Hagen ME, Bhakdi J.</div>
+                <div class="publication-title">DEEPGEN™—A Novel Variant Calling Assay for Low Frequency Variants</div>
+                <div class="publication-journal">Genes. 2021;12(4):507.</div>
+                <a href="https://doi.org/10.3390/genes12040507" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Bartek J Jr, Sjåvik K, Schaible S, Gulati S, Solheim O, Förander P, Jakola AS.</div>
+                <div class="publication-title">The role of angiotensin-converting enzyme inhibitors in patients with chronic subdural hematoma: a scandinavian population-based multicenter study</div>
+                <div class="publication-journal">World Neurosurg. 2018;113:e555-e560.</div>
+                <a href="https://doi.org/10.1016/j.wneu.2018.02.094" class="publication-link" target="_blank">View Article →</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Schaible SF, Aregger FC, Albers CE, Benneker LM, Deml MC.</div>
+                <div class="publication-title">Anterior Column Reconstruction of the Thoracolumbar Spine with a Modular Carbon-PEEK Vertebral Body Replacement Device: Single Center Retrospective Cohort Analysis of 28 Cases</div>
+                <div class="publication-journal">Surg Tech Dev.</div>
+                <span class="publication-status">In Press 2025</span>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-authors">Eberlein SC, Schaible SF, Klenke FM, Hecker A.</div>
+                <div class="publication-title">High-Accuracy Reduction of Comminuted Diaphyseal Femur Fractures Using On-Site 3-D-Printed Guides</div>
+                <div class="publication-journal">Eur J Trauma Emerg Surg.</div>
+                <span class="publication-status">In Press 2025</span>
+            </div>
+        </section>
+
+        <!-- Conferences Section -->
+        <section id="conferences" class="section">
+            <h2 class="section-title">Conference Contributions</h2>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Hip Flexion Influences Cross-Section-Based Measurement of Femoral Torsion: A Three-Dimensional Comparative Analysis of the Murphy and Waidelich Methods</div>
+                <div class="conference-event">Deutscher Kongress für Orthopädie und Unfallchirurgie (DKOU)</div>
+                <div class="conference-location">Berlin, Germany • October 28-31, 2025</div>
+                <a href="https://www.dkou.de/2025/programm" class="conference-link" target="_blank">View Program →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Hip Flexion Alters CT-Based Femoral Torsion Measurement: 3-D Comparison of Murphy Versus Waidelich Methods</div>
+                <div class="conference-event">16th Congress of the European Hip Society</div>
+                <div class="conference-location">Athens, Greece • October 17-18, 2025</div>
+                <a href="https://static.emedevents.com/uploads/conferences/session_brochure/c77ba89566068457fb80a5d7370ad9c4.pdf" class="conference-link" target="_blank">View Program →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Impact of Hip Flexion on CT-Based Femoral Torsion Measurements: A Three-Dimensional Comparative Analysis of Murphy and Waidelich Methods</div>
+                <div class="conference-event">85. Jahreskongress der Swiss Orthopaedics</div>
+                <div class="conference-location">Zürich, Switzerland • June 25-27, 2025</div>
+                <a href="https://sgo25.organizers-congress.org/frontend/index.php?page_id=13022&additions_conferenceschedule_action=detail&additions_conferenceschedule_controller=paperList&pid=19576&hash=586285779072c8fe5892b2116535303f73cfe48a3138876bb351447d37aadc02" class="conference-link" target="_blank">View Abstract →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Single-Stage Versus Two-Stage Posterior Fusion Procedure in Unstable Thoracolumbar Fractures of the Spine – A Bicentric Trial</div>
+                <div class="conference-event">85. Jahreskongress der Swiss Orthopaedics</div>
+                <div class="conference-location">Zürich, Switzerland • June 25-27, 2025</div>
+                <a href="https://sgo25.organizers-congress.org/frontend/index.php?page_id=13022&additions_conferenceschedule_action=detail&additions_conferenceschedule_controller=paperList&pid=19578&hash=9b52fe81df29c7c727442583c2de84eb0635db50565b80dbc9a1c50ddd73c48e" class="conference-link" target="_blank">View Abstract →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type poster">Poster</span>
+                <div class="conference-title">Radiographic and Clinical Outcomes of a 3D-Printed Mesh Polyamide Brace for Adolescent Idiopathic Scoliosis: A Retrospective Study</div>
+                <div class="conference-event">85. Jahreskongress der Swiss Orthopaedics</div>
+                <div class="conference-location">Zürich, Switzerland • June 25-27, 2025</div>
+                <a href="https://sgo25.organizers-congress.org/frontend/index.php?page_id=13022&additions_conferenceschedule_action=detail&additions_conferenceschedule_controller=paperList&pid=19923&hash=dff65c5edf053f8456394fa1423dbba6d0720a2bcfadfe61629e6afccb6a97f5" class="conference-link" target="_blank">View Poster →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Das Beste aus beiden Welten – Kombination von Freihand- und iCT-navigierter Instrumentierung für pädiatrische Deformitätskorrekturen</div>
+                <div class="conference-event">Deutscher Wirbelsäulenkongress</div>
+                <div class="conference-location">Hamburg, Germany • November 2024</div>
+                <a href="https://programme.conventus.de/dwg-2024/program/sessions/11bdbe36-0dd5-4da2-864c-fc7db2e496e5" class="conference-link" target="_blank">View Session →</a>
+                <a href="https://www.dwg.org/fileadmin/gesellschaften/media/dwg/ehm-praesidenten/programm/DWG_2024__Programm_web.pdf" class="conference-link" target="_blank">Program PDF →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Anterior column reconstruction using a modular carbon-peek device: 28-case study over 18 months</div>
+                <div class="conference-event">EUROSPINE Conference</div>
+                <div class="conference-location">Wien, Austria • October 2024</div>
+                <a href="https://www.sciencedirect.com/journal/brain-and-spine/vol/4/suppl/S2?page=3" class="conference-link" target="_blank">View Abstracts →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Anterior column reconstruction of the thoracolumbar spine with a modular carbon-PEEK vertebral body replacement device</div>
+                <div class="conference-event">Deutscher Kongress für Orthopädie und Unfallchirurgie (DKOU)</div>
+                <div class="conference-location">Berlin, Germany • October 22-25, 2024</div>
+                <a href="https://sepla.intercongress.de/Intercongress/2401/TIMETABLE/DKOU24/timetable?startdateoffset=3" class="conference-link" target="_blank">View Timetable →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">The best of both worlds – combined freehand and navigated instrumentation</div>
+                <div class="conference-event">84th Annual Meeting, Swiss Orthopaedics</div>
+                <div class="conference-location">Lausanne, Switzerland • June 26-28, 2024</div>
+                <a href="https://organizers-congress.org/custom/media/SGO24/SGO24.Programmheft_WEB.pdf" class="conference-link" target="_blank">View Program →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type">Abstract</span>
+                <div class="conference-title">Corona Mortis: Clinical Evaluation of Prevalence, Anatomy, and Relevance in Anterior Approaches to the Pelvis and Acetabulum</div>
+                <div class="conference-event">15th Congress of the European Hip Society</div>
+                <div class="conference-location">Bern, Switzerland • October 4-6, 2023</div>
+                <a href="https://europeanhipsociety.com/wp-content/uploads/2023/11/EHS23-Abstract-book.pdf" class="conference-link" target="_blank">View Abstract Book →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type poster">Poster</span>
+                <div class="conference-title">Corona Mortis: Clinical Evaluation of Prevalence, Anatomy, and Relevance in Anterior Approaches</div>
+                <div class="conference-event">5th Swiss Orthogeriatrics Day</div>
+                <div class="conference-location">Bern, Switzerland • September 2023</div>
+                <a href="https://www.orthogeriatrics.ch/en/page/Media/Poster-83589" class="conference-link" target="_blank">View Poster →</a>
+            </div>
+
+            <div class="conference-item">
+                <span class="conference-type poster">Poster</span>
+                <span style="color: var(--accent); font-weight: 600;">Prize Winner</span>
+                <div class="conference-title">Prevention of Post-operative Small for Size and Flow Syndrome via Portocaval Shunt in a Porcine Model</div>
+                <div class="conference-event">32nd Biotest Wilsede-Workshop</div>
+                <div class="conference-location">Wilsede, Germany • June 2022</div>
+                <a href="https://www.biotest-wilsede.de/fileadmin/user_upload/220509_BT_Programm_20seitig_DINA5_2022.pdf" class="conference-link" target="_blank">View Program →</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Update navigation active states based on scroll position
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveLink() {
+            const scrollPosition = window.scrollY + 150;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index].classList.add('active');
+                }
+            });
+        }
+
+        // Handle navigation clicks with smooth scrolling
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offset = 90;
+                    const targetPosition = targetSection.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active link on scroll
+        window.addEventListener('scroll', updateActiveLink);
+
+        // Check URL hash on page load and scroll to section if present
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    setTimeout(() => {
+                        const offset = 90;
+                        const targetPosition = targetSection.offsetTop - offset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
+            updateActiveLink();
+        });
+
+        // Update URL hash when scrolling to sections
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                sections.forEach((section, index) => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top >= -100 && rect.top <= 200) {
+                        const sectionId = section.getAttribute('id');
+                        if (sectionId && window.location.hash !== `#${sectionId}`) {
+                            history.replaceState(null, null, `#${sectionId}`);
+                        }
+                    }
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
