@@ -1,9 +1,4 @@
-        .cv-header, .cv-institution {
-            -webkit-user-select: none; /* Prevent text selection on tap targets */
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -169,6 +164,11 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .cv-item::before {
@@ -229,6 +229,13 @@
         }
 
         .cv-item:hover .cv-description {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        /* Touch-friendly expanded state for mobile */
+        .cv-item.expanded .cv-description {
             max-height: 200px;
             opacity: 1;
             margin-top: 0.75rem;
@@ -461,7 +468,7 @@
             .cv-title {
                 font-size: 1rem;
                 margin-bottom: 0.25rem;
-                padding-right: 2.5rem; /* Adjust for mobile */
+                padding-right: 2.5rem;
             }
 
             .cv-date {
@@ -476,13 +483,6 @@
 
             .cv-description {
                 font-size: 0.85rem;
-            }
-
-            /* Touch-friendly hover states for mobile */
-            .cv-item:active .cv-description {
-                max-height: 200px;
-                opacity: 1;
-                margin-top: 0.75rem;
             }
 
             /* Publications Mobile */
@@ -1014,6 +1014,28 @@
     </div>
 
     <script>
+        // Handle tappable CV items on mobile
+        const cvItems = document.querySelectorAll('.cv-item');
+        
+        cvItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Check if the device is touch-enabled
+                if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                    e.preventDefault();
+                    
+                    // Toggle expanded class
+                    this.classList.toggle('expanded');
+                    
+                    // Close other expanded items (optional - remove if you want multiple items open)
+                    cvItems.forEach(otherItem => {
+                        if (otherItem !== this) {
+                            otherItem.classList.remove('expanded');
+                        }
+                    });
+                }
+            });
+        });
+
         // Update navigation active states based on scroll position
         const sections = document.querySelectorAll('.section');
         const navLinks = document.querySelectorAll('.nav-link');
